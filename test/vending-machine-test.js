@@ -16,6 +16,7 @@ const runTestForVendCoins = function() {
   assert(2, determineNoOfCoins(3), "The Number of Coins must be 2 for the amount of 3 ", "determineNoOfCoins");
   assert(2, determineNoOfCoins(4), "The Number of Coins must be 2 for the amount of 4 ", "determineNoOfCoins");
   assert(1, determineNoOfCoins(5), "The Number of Coins must be 3 for the amount of 5 ", "determineNoOfCoins");
+  assert(2, determineNoOfCoins(6), "The Number of Coins must be 3 for the amount of 5 ", "determineNoOfCoins");
   assert(2, determineNoOfCoins(11), "The Number of Coins must be 3 fo", "determineNoOfCoins");
   assert(2, determineNoOfCoins(12), "The Number of Coins must be 3 for the amount of 5 ", "determineNoOfCoins");
 }
