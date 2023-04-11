@@ -1,5 +1,11 @@
-const vendCoins = function(number) {
-  return number;
+const isEven = function(number) {
+  return number % 2 === 0;
 }
 
-exports.vendCoins = vendCoins;
+const determineNoOfCoins = function(amount) {
+  const noOfTwoRupeeCoins = Math.floor(amount / 2);
+
+  return isEven ? noOfTwoRupeeCoins : noOfTwoRupeeCoins + 1;
+}
+
+exports.determineNoOfCoins = determineNoOfCoins;
