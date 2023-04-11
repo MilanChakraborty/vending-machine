@@ -1,31 +1,32 @@
-const determineNoOf10RupeeCoins = function(amount) {
-  return Math.floor(amount / 10);
+const getNoOfCoins = function(amount, denomination) {
+  return Math.floor(amount / denomination);
 }
 
-const determineNoOf5RupeeCoins = function(amount) {
-  return Math.floor(amount / 5);
-}
-
-const determineNoOf2RupeeCoins = function(amount) {
-  return Math.floor(amount / 2);
-}
-
-const determineNoOfCoins = function(amount) {
+const getCoinsLog = function(amount) {
+  const denominations = [1, 2, 5, 10];
+  const coinsForEachDenominations = [];
   let remainingAmount = amount;
 
-  const noOfTenRupeeCoins = determineNoOf10RupeeCoins(remainingAmount);
-  remainingAmount = remainingAmount - (noOfTenRupeeCoins * 10);
+  for (let index = denominations.length - 1; index >= 0; index--) {
 
-  const noOfFiveRupeeCoins = determineNoOf5RupeeCoins(remainingAmount);
-  remainingAmount = remainingAmount - (noOfFiveRupeeCoins * 5);
+    const coins = getNoOfCoins(remainingAmount, denominations[index]);
+    coinsForEachDenominations.push(coins);
+    remainingAmount = remainingAmount - (coins * denominations[index]);
+  }
 
-  const noOfTwoRupeeCoins = determineNoOf2RupeeCoins(remainingAmount);
-  remainingAmount = remainingAmount - (noOfTwoRupeeCoins * 2);
-
-  const noOfOneRupeeCoins = remainingAmount % 2 === 0 ? 0 : 1;
-
-  const totalCoins = noOfOneRupeeCoins + noOfTwoRupeeCoins + noOfFiveRupeeCoins + noOfTenRupeeCoins;
-  return totalCoins;
+  return coinsForEachDenominations;
 }
 
-exports.determineNoOfCoins = determineNoOfCoins;
+const sumOf = function(list) {
+  let sum = 0;
+  for (number of list) {
+    sum += number;
+  }
+  return sum;
+}
+
+const getTotalNoOfCoins = function(amount) {
+  return sumOf(getCoinsLog(amount));
+}
+
+exports.getTotalNoOfCoins = getTotalNoOfCoins;
