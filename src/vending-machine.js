@@ -1,5 +1,5 @@
-const giveOne = function() {
-  return 1;
+const vendCoins = function(number) {
+  return number;
 }
 
-exports.giveOne = giveOne;
+exports.vendCoins = vendCoins;
