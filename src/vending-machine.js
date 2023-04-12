@@ -2,12 +2,37 @@ const getNoOfCoins = function(amount, denomination) {
   return Math.floor(amount / denomination);
 }
 
-const getCoinsLog = function(amount, denomination_list) {
+const maxOf = function(listOfNumbers) {
+  let currentMax = listOfNumbers[0];
+
+  for (value of listOfNumbers) {
+    if (value > currentMax) {
+      currentMax = value;
+    };
+  };
+  return currentMax;
+}
+
+const maxSort = function(listOfNumbers) {
+  const sortedArray = [];
+  const length = listOfNumbers.length;
+
+  for (let index = 0; index < length; index++) {
+    let currentMax = maxOf(listOfNumbers);
+    let indexOfCurrentMax = listOfNumbers.indexOf(currentMax);
+
+    sortedArray.push(currentMax);
+    listOfNumbers.splice(indexOfCurrentMax, 1);
+  }
+  return sortedArray;
+}
+
+const getCoinsLog = function(amount, denominationList) {
   const coinsForEachDenominations = {};
   let remainingAmount = amount;
-  denomination_list = denomination_list.reverse();
+  denominationList = maxSort(denominationList);
 
-  for (const denomination of denomination_list) {
+  for (const denomination of denominationList) {
     const coins = getNoOfCoins(remainingAmount, denomination);
 
     coinsForEachDenominations[denomination] = coins;
@@ -30,3 +55,5 @@ const getMinimumNoOfCoins = function(amount, denomination_list) {
 }
 
 exports.getMinimumNoOfCoins = getMinimumNoOfCoins;
+exports.maxOf = maxOf;
+exports.maxSort = maxSort;

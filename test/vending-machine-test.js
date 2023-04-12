@@ -9,27 +9,33 @@ const getTestLog = testing.getTestLog;
 const displayTestSummary = testing.displayTestSummary;
 
 const getMinimumNoOfCoins = vendingMachine.getMinimumNoOfCoins;
+const maxOf = vendingMachine.maxOf;
+const maxSort = vendingMachine.maxSort;
 
 const runTestForGetMinimunNoOfCoins = function() {
   printHeadLine("Running Test For Get Minimum No Of Coins");
 
-  assert(0, getMinimumNoOfCoins(0, [1, 2, 5, 10]), "The Number of Coins To must 0 for amount of 0", "getMinimumNoOfCoins");
-  assert(1, getMinimumNoOfCoins(1, [1, 2, 5, 10]), "The Number of Coins must be 1 for amount of 1 ", "getMinimumNoOfCoins");
-  assert(1, getMinimumNoOfCoins(2, [1, 2, 5, 10]), "The Number of Coins must be 1 for the amount of 2 ", "getMinimumNoOfCoins");
-  assert(2, getMinimumNoOfCoins(3, [1, 2, 5, 10]), "The Number of Coins must be 2 for the amount of 3 ", "getMinimumNoOfCoins");
-  assert(2, getMinimumNoOfCoins(4, [1, 2, 5, 10]), "The Number of Coins must be 2 for the amount of 4 ", "getMinimumNoOfCoins");
-  assert(1, getMinimumNoOfCoins(5, [1, 2, 5, 10]), "The Number of Coins must be 1 for the amount of 5 ", "getMinimumNoOfCoins");
-  assert(2, getMinimumNoOfCoins(6, [1, 2, 5, 10]), "The Number of Coins must be 2 for the amount of 6 ", "getMinimumNoOfCoins");
-  assert(2, getMinimumNoOfCoins(11, [1, 2, 5, 10]), "The Number of Coins must be 2 for the amount of 11", "getMinimumNoOfCoins");
-  assert(2, getMinimumNoOfCoins(12, [1, 2, 5, 10]), "The Number of Coins must be 2 for the amount of 12 ", "getMinimumNoOfCoins");
-  assert(3, getMinimumNoOfCoins(16, [1, 2, 5, 10]), "The Number of Coins must be 3 for the amount of 16 ", "getMinimumNoOfCoins");
-  assert(6, getMinimumNoOfCoins(88, [1, 2, 5, 10, 20, 50]), "The Number of Coins must be 6 for the amount of 88 ", "getMinimumNoOfCoins");
-  assert(14, getMinimumNoOfCoins(132, [1, 2, 5, 10]), "The Number of Coins must be 14 for the amount of 132 ", "getMinimumNoOfCoins");
-  assert(5, getMinimumNoOfCoins(132, [1, 2, 5, 10, 100]), "The Number of Coins must be 5 for the amount of 132 ", "getMinimumNoOfCoins");
-  assert(12, getMinimumNoOfCoins(12, [1]), "The Number of Coins must be 12 for the amount of 12 ", "getMinimumNoOfCoins");
-  assert(4, getMinimumNoOfCoins(13, [1, 4, 7]), "The Number of Coins must be 4 for the amount of 13 ", "getMinimumNoOfCoins");
+  assert(0, getMinimumNoOfCoins(0, [1, 2, 5, 10]), "Testing for the amount of zero ", "getMinimumNoOfCoins");
+  assert(1, getMinimumNoOfCoins(1, [1, 2, 5, 10]), "Testing for amount of one, and ordered denomination list", "getMinimumNoOfCoins");
+  assert(1, getMinimumNoOfCoins(2, [1, 2]), "Testing for denomination of one, two with even amount", "getMinimumNoOfCoins");
+  assert(2, getMinimumNoOfCoins(3, [1, 2]), "Testing for denominations of one, two with odd amount ", "getMinimumNoOfCoins");
+  assert(1, getMinimumNoOfCoins(5, [1, 2, 5]), "Testing for denomination of one, two and five when amount is multiple of 5", "getMinimumNoOfCoins");
+  assert(2, getMinimumNoOfCoins(6, [1, 2, 5]), "Testing for denomination of one, two and five when amount is not multiple of 5", "getMinimumNoOfCoins");
+  assert(1, getMinimumNoOfCoins(10, [1, 2, 5, 10]), "Testing for denomination of 1,2,5 and 10 when amount is multiple of 10", "getMinimumNoOfCoins");
+  assert(2, getMinimumNoOfCoins(12, [1, 2, 5, 10]), "Testing for denomination of 1,2,5 and 10 when amount is not multiple of 10", "getMinimumNoOfCoins");
+  assert(6, getMinimumNoOfCoins(88, [1, 2, 5, 10, 20, 50]), "Testing for any set of denomination", "getMinimumNoOfCoins");
+  assert(14, getMinimumNoOfCoins(132, [1, 2, 5, 10]), "Testing for small sset of denomination", "getMinimumNoOfCoins");
+  assert(12, getMinimumNoOfCoins(12, [1]), "Testing for set of one denomination", "getMinimumNoOfCoins");
+  assert(4, getMinimumNoOfCoins(13, [1, 4, 7]), "Testing for set of denomination 1, 4, 7", "getMinimumNoOfCoins");
+  assert(27, getMinimumNoOfCoins(132, [5, 2, 1]), "Testing for unordered data and small set of denomination", "getMinimumNoOfCoins");
+  assert(8, getMinimumNoOfCoins(132, [5, 10, 2, 1, 20]), "Testing for unordered data and large set of denomination", "getMinimumNoOfCoins");
+  assert(3, getMinimumNoOfCoins(8, [5, 2, 1]), "Testing for reversed arranged denomination list", "getMinimumNoOfCoins");
+  assert(6, maxOf([1, 3, 6, 3]), "The Number max number must be 6", "maxOf");
+  assert(13, maxOf([1, 13, 0, 6, 3]), "The Number max number must be 13", "maxOf");
+  assertArray([13, 6, 3], maxSort([6, 13, 3]), "Testing for Max Sort", "maxSort");
 }
 
 runTestForGetMinimunNoOfCoins();
 displayTestSummary();
+
 
