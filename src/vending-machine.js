@@ -2,16 +2,14 @@ const getNoOfCoins = function(amount, denomination) {
   return Math.floor(amount / denomination);
 }
 
-const getCoinsLog = function(amount) {
-  const denominations = [1, 2, 5, 10];
+const getCoinsLog = function(amount, denomination_list) {
   const coinsForEachDenominations = [];
   let remainingAmount = amount;
 
-  for (let index = denominations.length - 1; index >= 0; index--) {
-
-    const coins = getNoOfCoins(remainingAmount, denominations[index]);
+  for (let index = denomination_list.length - 1; index >= 0; index--) {
+    const coins = getNoOfCoins(remainingAmount, denomination_list[index]);
     coinsForEachDenominations.push(coins);
-    remainingAmount = remainingAmount - (coins * denominations[index]);
+    remainingAmount = remainingAmount - (coins * denomination_list[index]);
   }
 
   return coinsForEachDenominations;
@@ -25,8 +23,8 @@ const sumOf = function(list) {
   return sum;
 }
 
-const getTotalNoOfCoins = function(amount) {
-  return sumOf(getCoinsLog(amount));
+const getTotalNoOfCoins = function(amount, denomination_list) {
+  return sumOf(getCoinsLog(amount, denomination_list));
 }
 
 exports.getTotalNoOfCoins = getTotalNoOfCoins;
