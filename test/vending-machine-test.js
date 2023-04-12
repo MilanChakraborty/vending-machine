@@ -27,6 +27,7 @@ const runTestForGetMinimunNoOfCoins = function() {
   assert(14, getMinimumNoOfCoins(132, [1, 2, 5, 10]), "The Number of Coins must be 14 for the amount of 132 ", "getMinimumNoOfCoins");
   assert(5, getMinimumNoOfCoins(132, [1, 2, 5, 10, 100]), "The Number of Coins must be 5 for the amount of 132 ", "getMinimumNoOfCoins");
   assert(12, getMinimumNoOfCoins(12, [1]), "The Number of Coins must be 12 for the amount of 12 ", "getMinimumNoOfCoins");
+  assert(4, getMinimumNoOfCoins(13, [1, 4, 7]), "The Number of Coins must be 4 for the amount of 13 ", "getMinimumNoOfCoins");
 }
 
 runTestForGetMinimunNoOfCoins();
