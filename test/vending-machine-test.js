@@ -9,8 +9,7 @@ const getTestLog = testing.getTestLog;
 const displayTestSummary = testing.displayTestSummary;
 
 const getMinimumNoOfCoins = vendingMachine.getMinimumNoOfCoins;
-const maxOf = vendingMachine.maxOf;
-const maxSort = vendingMachine.maxSort;
+const sort = vendingMachine.sort;
 
 const runTestForGetMinimunNoOfCoins = function() {
   printHeadLine("Running Test For Get Minimum No Of Coins");
@@ -30,9 +29,7 @@ const runTestForGetMinimunNoOfCoins = function() {
   assert(27, getMinimumNoOfCoins(132, [5, 2, 1]), "Testing for unordered data and small set of denomination", "getMinimumNoOfCoins");
   assert(8, getMinimumNoOfCoins(132, [5, 10, 2, 1, 20]), "Testing for unordered data and large set of denomination", "getMinimumNoOfCoins");
   assert(3, getMinimumNoOfCoins(8, [5, 2, 1]), "Testing for reversed arranged denomination list", "getMinimumNoOfCoins");
-  assert(6, maxOf([1, 3, 6, 3]), "The Number max number must be 6", "maxOf");
-  assert(13, maxOf([1, 13, 0, 6, 3]), "The Number max number must be 13", "maxOf");
-  assertArray([13, 6, 3], maxSort([6, 13, 3]), "Testing for Max Sort", "maxSort");
+  assertArray([13, 6, 3], sort([6, 13, 3]), "Testing for Bubble Sort", "sort");
 }
 
 runTestForGetMinimunNoOfCoins();
