@@ -3,17 +3,13 @@ const getNoOfCoins = function(amount, denomination) {
 }
 
 const getCopy = function(list) {
-  const copiedArray = [];
-  for (value of list) {
-    copiedArray.push(value);
-  }
-  return copiedArray;
+  return list.slice(0);
 }
 
 const maxOf = function(listOfNumbers) {
   let currentMax = listOfNumbers[0];
 
-  for (value of listOfNumbers) {
+  for (const value of listOfNumbers) {
     if (value > currentMax) {
       currentMax = value;
     };

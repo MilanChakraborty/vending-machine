@@ -37,5 +37,5 @@ const runTestForGetMinimunNoOfCoins = function() {
 
 runTestForGetMinimunNoOfCoins();
 displayTestSummary();
-
+console.table(getTestLog());
 
