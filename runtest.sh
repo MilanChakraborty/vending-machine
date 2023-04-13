@@ -1,56 +1,23 @@
 #! /bin/bash
 
-function print_file_run_status() {
-  local FILE=$1;
-  local STATUS=$FILE ran at $(date);
-  echo -e "\n\t$STATUS" ;
-}
+function autorun() {
+  local COMMAND=$1
+  local SCRIPT_NAME=$2
+  local PREVIOUSLY_MODIFIED_TIME=$(date -r $SCRIPT_NAME)
 
-function is_file_in_pwd() {
-  ls $1 &> /dev/null;
-}
-
-function spinner() {
-  tput civis
-  echo -en "\r  $1 is running..."
-  sleep 0.1
-  echo -en "\r  $1 is running..."
-  sleep 0.1
-  echo -en "\r  $1 is running..."
-  sleep 0.1
-  echo -en "\r  $1 is running..."
-  sleep 0.1
-  echo -en "\r  $1 is running..."
-  sleep 0.1
-  echo -en "\r  $1 is running..."
-  sleep 0.1
-}
-
-function test() {
-  local COMMAND=node;
-  local FILE=test/vending-machine-test.js;
-
-  if ! is_file_in_pwd $FILE
-  then
-    echo "$FILE is not present in PWD";
-    exit 1;
-  fi;
-
-  local PREVIOUS_MODIFIED_TIME="$(date -r "$FILE")";
-
-  while true
-    spinner $FILE;
+  while [ 1 ]
   do
-    local CURRENT_MODIFIED_TIME="$(date -r "$FILE")";
+    local CURRENTLY_MODIFIED_TIME=$(date -r $SCRIPT_NAME)
 
-    if [ "$PREVIOUS_MODIFIED_TIME" != "$CURRENT_MODIFIED_TIME" ];
+    if [ "$CURRENTLY_MODIFIED_TIME" !=  "$PREVIOUSLY_MODIFIED_TIME" ]
     then
       clear;
-      $COMMAND $FILE;
-      PREVIOUS_MODIFIED_TIME=$CURRENT_MODIFIED_TIME;
+      $COMMAND $SCRIPT_NAME
+      echo $CURRENTLY_MODIFIED_TIME;
     fi
+    sleep 3;
+    PREVIOUSLY_MODIFIED_TIME=$CURRENTLY_MODIFIED_TIME
   done
-
 }
 
-test $1 $2;
+autorun "node" "test/vending-machine-test.js"
