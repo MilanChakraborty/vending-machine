@@ -24,7 +24,7 @@ const runTestForGetMinimunNoOfCoins = function() {
   assert(1, getMinimumNoOfCoins(10, [1, 2, 5, 10]), "Testing for denomination of 1,2,5 and 10 when amount is multiple of 10", "getMinimumNoOfCoins");
   assert(2, getMinimumNoOfCoins(12, [1, 2, 5, 10]), "Testing for denomination of 1,2,5 and 10 when amount is not multiple of 10", "getMinimumNoOfCoins");
   assert(6, getMinimumNoOfCoins(88, [1, 2, 5, 10, 20, 50]), "Testing for any set of denomination", "getMinimumNoOfCoins");
-  assert(14, getMinimumNoOfCoins(132, [1, 2, 5, 10]), "Testing for small sset of denomination", "getMinimumNoOfCoins");
+  assert(14, getMinimumNoOfCoins(132, [1, 2, 5, 10]), "Testing for small set of denomination", "getMinimumNoOfCoins");
   assert(12, getMinimumNoOfCoins(12, [1]), "Testing for set of one denomination", "getMinimumNoOfCoins");
   assert(4, getMinimumNoOfCoins(13, [1, 4, 7]), "Testing for set of denomination 1, 4, 7", "getMinimumNoOfCoins");
   assert(27, getMinimumNoOfCoins(132, [5, 2, 1]), "Testing for unordered data and small set of denomination", "getMinimumNoOfCoins");

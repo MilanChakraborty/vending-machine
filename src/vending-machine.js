@@ -2,6 +2,14 @@ const getNoOfCoins = function(amount, denomination) {
   return Math.floor(amount / denomination);
 }
 
+const getCopy = function(list) {
+  const copiedArray = [];
+  for (value of list) {
+    copiedArray.push(value);
+  }
+  return copiedArray;
+}
+
 const maxOf = function(listOfNumbers) {
   let currentMax = listOfNumbers[0];
 
@@ -14,15 +22,16 @@ const maxOf = function(listOfNumbers) {
 }
 
 const maxSort = function(listOfNumbers) {
+  const listOfNumbersCopy = getCopy(listOfNumbers);
   const sortedArray = [];
-  const length = listOfNumbers.length;
+  const length = listOfNumbersCopy.length;
 
   for (let index = 0; index < length; index++) {
-    let currentMax = maxOf(listOfNumbers);
-    let indexOfCurrentMax = listOfNumbers.indexOf(currentMax);
+    let currentMax = maxOf(listOfNumbersCopy);
+    let indexOfCurrentMax = listOfNumbersCopy.indexOf(currentMax);
 
     sortedArray.push(currentMax);
-    listOfNumbers.splice(indexOfCurrentMax, 1);
+    listOfNumbersCopy.splice(indexOfCurrentMax, 1);
   }
   return sortedArray;
 }
