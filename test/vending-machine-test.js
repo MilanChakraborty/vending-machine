@@ -9,35 +9,61 @@ const groupingTestLog = testing.groupingTestLog;
 const getTestLog = testing.getTestLog;
 const displayTestSummary = testing.displayTestSummary;
 
-const getMinimumNoOfCoins = vendingMachine.getMinimumNoOfCoins;
+const determineMinimumNoOfCoins = vendingMachine.determineMinimumNoOfCoins;
 const sort = vendingMachine.sort;
 const getDenominationsLog = vendingMachine.getDenominationsLog;
 
-const runTestForGetMinimunNoOfCoins = function() {
-  printHeadLine("Running Test For Get Minimum No Of Coins");
 
-  assert(0, getMinimumNoOfCoins(0, [1, 2, 5, 10]), "Testing for the amount of zero ", "getMinimumNoOfCoins");
-  assert(1, getMinimumNoOfCoins(1, [1, 2, 5, 10]), "Testing for amount of one, and ordered denomination list", "getMinimumNoOfCoins");
-  assert(1, getMinimumNoOfCoins(2, [1, 2]), "Testing for denomination of one, two with even amount", "getMinimumNoOfCoins");
-  assert(2, getMinimumNoOfCoins(3, [1, 2]), "Testing for denominations of one, two with odd amount ", "getMinimumNoOfCoins");
-  assert(1, getMinimumNoOfCoins(5, [1, 2, 5]), "Testing for denomination of one, two and five when amount is multiple of 5", "getMinimumNoOfCoins");
-  assert(2, getMinimumNoOfCoins(6, [1, 2, 5]), "Testing for denomination of one, two and five when amount is not multiple of 5", "getMinimumNoOfCoins");
-  assert(1, getMinimumNoOfCoins(10, [1, 2, 5, 10]), "Testing for denomination of 1,2,5 and 10 when amount is multiple of 10", "getMinimumNoOfCoins");
-  assert(2, getMinimumNoOfCoins(12, [1, 2, 5, 10]), "Testing for denomination of 1,2,5 and 10 when amount is not multiple of 10", "getMinimumNoOfCoins");
-  assert(6, getMinimumNoOfCoins(88, [1, 2, 5, 10, 20, 50]), "Testing for any set of denomination", "getMinimumNoOfCoins");
-  assert(14, getMinimumNoOfCoins(132, [1, 2, 5, 10]), "Testing for small set of denomination", "getMinimumNoOfCoins");
-  assert(12, getMinimumNoOfCoins(12, [1]), "Testing for set of one denomination", "getMinimumNoOfCoins");
-  assert(4, getMinimumNoOfCoins(13, [1, 4, 7]), "Testing for set of denomination 1, 4, 7", "getMinimumNoOfCoins");
-  assert(27, getMinimumNoOfCoins(132, [5, 2, 1]), "Testing for unordered data and small set of denomination", "getMinimumNoOfCoins");
-  assert(8, getMinimumNoOfCoins(132, [5, 10, 2, 1, 20]), "Testing for unordered data and large set of denomination", "getMinimumNoOfCoins");
-  assert(3, getMinimumNoOfCoins(8, [5, 2, 1]), "Testing for reversed arranged denomination list", "getMinimumNoOfCoins");
-  assertArray([13, 6, 3], sort([6, 13, 3]), "Testing for Bubble Sort", "sort");
-  assertObject({10: 1, 5: 1, 2:1, 1:1}, getDenominationsLog(18, [1, 2, 5, 10]), "Testing For Getting Denominations Log with small set of denomination list", "getDenominationsLog");
-  assertObject({50: 1, 20: 1, 10: 1, 5: 1, 2:1, 1:1}, getDenominationsLog(88, [1, 2, 5, 10, 20, 50]), "Testing For Getting Denominations Log with large set of Denomination List",  "getDenominationsLog");
-  assertObject({50: 1, 20: 1, 10: 1, 5: 1, 2:1, 1:1}, getDenominationsLog(88, [1, 2, 5, 10, 20, 50]), "Testing For Getting Denominations Log for the amount of Zero",  "getDenominationsLog");
+
+const runTestForGetArrangedDenominationSet = function() {
+  const functionName = "determineMinimumNoOfCoins";
+  printHeadLine("Running Test For Arranged Denomination List");
+
+  assert(0, determineMinimumNoOfCoins(0, [1, 2, 5, 10]), "Amount of zero must give 0 Coins for any denomination set", functionName);
+  assert(1, determineMinimumNoOfCoins(1, [1, 2, 5, 10]), "Amount of one must give 1 Coins for denomination set having one", functionName);
+  assert(0, determineMinimumNoOfCoins(1, [2, 5, 10]), "Amount of one must give 0 Coins for denomination set not having one", functionName);
+  assert(4, determineMinimumNoOfCoins(13, [1, 4, 7]), "Amount of 13 must give 4 Coins for denomination set of 1,4 and 7", functionName);
 }
 
-runTestForGetMinimunNoOfCoins();
+const runTestForGetUnarrangedDenominationSet = function() {
+  const functionName = "determineMinimumNoOfCoins";
+  printHeadLine("Running Test For Unarranged Denomination List");
+
+  assert(27, determineMinimumNoOfCoins(132, [5, 2, 1]), "Amount of 132 must give 27 coins for unordered denominations set of 1,2 and 5", functionName);
+  assert(8, determineMinimumNoOfCoins(132, [5, 10, 2, 1, 20]), "Amount of 132 must give 8 coins for unordered", "determineMinimumNoOfCoins");
+
+}
+
+const runTestForSort = function() {
+  const functionName = "sort";
+  printHeadLine("Running Test For Sorting")
+
+  assertArray([13, 6, 3], sort([6, 13, 3]), "Should give the arranged array for list of distinct element", functionName);
+  assertArray([13, 10, 5, 5, 0], sort([13, 5, 10, 0, 5]), "Should give the arranged array for a mixed list of distinct and same element", functionName);
+}
+
+const runTestForGetDenominationLog = function() {
+  const functionName = "getDenominationsLog";
+  let message = "";
+  printHeadLine("Running Test For Get Denomination Log");
+
+  message = "Amount of 18 must give one coin of each Denomination of (1, 2, 5, 10)"
+  assertObject({10: 1, 5: 1, 2:1, 1:1}, getDenominationsLog(18, [1, 2, 5, 10]), message , functionName);
+
+  message = "Amount of 0 must return zero coins for each denominations of (1, 2, 5, 10)"
+  assertObject({10: 0, 5: 0, 2: 0, 1: 0}, getDenominationsLog(0, [1, 2, 5, 10]), message,  functionName);
+}
+
+const runTests = function() {
+  printHeadLine("Vending Machine Tests");
+
+  runTestForGetArrangedDenominationSet();
+  runTestForGetUnarrangedDenominationSet();
+  runTestForSort();
+  runTestForGetDenominationLog();
+}
+
+runTests();
 displayTestSummary();
 //console.table(getTestLog());
 

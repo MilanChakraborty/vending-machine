@@ -43,10 +43,10 @@ const sumOf = function(list) {
   return sum;
 }
 
-const getMinimumNoOfCoins = function(amount, denomination_list) {
+const determineMinimumNoOfCoins = function(amount, denomination_list) {
   return sumOf(getDenominationsLog(amount, denomination_list));
 }
 
-exports.getMinimumNoOfCoins = getMinimumNoOfCoins;
+exports.determineMinimumNoOfCoins = determineMinimumNoOfCoins;
 exports.sort = sort;
 exports.getDenominationsLog = getDenominationsLog;
