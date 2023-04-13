@@ -1,31 +1,21 @@
+const sort = require("../lib/sorting-utilities.js");
+const math = require("../lib/math-utilities.js")
+
+const decendingSort = sort.decendingSort;
+
+const sumOf = math.sumOf;
+
+
 const getNoOfCoins = function(amount, denomination) {
   return Math.floor(amount / denomination);
 }
 
-const sort = function(list) {
-  const listCopy = list.slice(0);
-  let length = listCopy.length;
-
-  for (let i = 0; i < listCopy.length; i++) {
-    for (let j = 0; j < length; j++) {
-
-      if (listCopy[j] < listCopy[j + 1]) {
-        const temp = listCopy[j];
-        listCopy[j] = listCopy[j + 1];
-        listCopy[j + 1] = temp;
-      }
-    }
-    length = length - 1;
-  }
-  return listCopy;
-}
-
-const getDenominationsLog = function(amount, denominationList) {
+const getDenominationsLog = function(amount, denominations) {
   const coinsForEachDenominations = {};
   let remainingAmount = amount;
-  denominationList = sort(denominationList);
+  denominations = decendingSort(denominations);
 
-  for (const denomination of denominationList) {
+  for (const denomination of denominations) {
     const coins = getNoOfCoins(remainingAmount, denomination);
 
     coinsForEachDenominations[denomination] = coins;
@@ -35,18 +25,10 @@ const getDenominationsLog = function(amount, denominationList) {
   return coinsForEachDenominations;
 }
 
-const sumOf = function(list) {
-  let sum = 0;
-  for (const value of Object.values(list)) {
-    sum += value;
-  }
-  return sum;
-}
-
 const determineMinimumNoOfCoins = function(amount, denomination_list) {
   return sumOf(getDenominationsLog(amount, denomination_list));
 }
 
 exports.determineMinimumNoOfCoins = determineMinimumNoOfCoins;
-exports.sort = sort;
+exports.decendingSort = decendingSort;
 exports.getDenominationsLog = getDenominationsLog;

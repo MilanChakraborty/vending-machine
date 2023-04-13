@@ -1,4 +1,4 @@
-const testing = require("../lib/testing.js");
+const testing = require("../lib/testing-utilities.js");
 const vendingMachine = require("../src/vending-machine.js");
 
 const assert = testing.assert;
@@ -10,12 +10,12 @@ const getTestLog = testing.getTestLog;
 const displayTestSummary = testing.displayTestSummary;
 
 const determineMinimumNoOfCoins = vendingMachine.determineMinimumNoOfCoins;
-const sort = vendingMachine.sort;
+const decendingSort = vendingMachine.decendingSort;
 const getDenominationsLog = vendingMachine.getDenominationsLog;
 
 
 
-const runTestForGetArrangedDenominationSet = function() {
+const testGetArrangedDenominationSet = function() {
   const functionName = "determineMinimumNoOfCoins";
   printHeadLine("Running Test For Arranged Denomination List");
 
@@ -25,7 +25,7 @@ const runTestForGetArrangedDenominationSet = function() {
   assert(4, determineMinimumNoOfCoins(13, [1, 4, 7]), "Amount of 13 must give 4 Coins for denomination set of 1,4 and 7", functionName);
 }
 
-const runTestForGetUnarrangedDenominationSet = function() {
+const testGetUnarrangedDenominationSet = function() {
   const functionName = "determineMinimumNoOfCoins";
   printHeadLine("Running Test For Unarranged Denomination List");
 
@@ -34,15 +34,15 @@ const runTestForGetUnarrangedDenominationSet = function() {
 
 }
 
-const runTestForSort = function() {
-  const functionName = "sort";
+const testDecendingSort = function() {
+  const functionName = "decendingSort";
   printHeadLine("Running Test For Sorting")
 
-  assertArray([13, 6, 3], sort([6, 13, 3]), "Should give the arranged array for list of distinct element", functionName);
-  assertArray([13, 10, 5, 5, 0], sort([13, 5, 10, 0, 5]), "Should give the arranged array for a mixed list of distinct and same element", functionName);
+  assertArray([13, 6, 3], decendingSort([6, 13, 3]), "Should give the arranged array for list of distinct element", functionName);
+  assertArray([13, 10, 5, 5, 0], decendingSort([13, 5, 10, 0, 5]), "Should give the arranged array for a mixed list of distinct and same element", functionName);
 }
 
-const runTestForGetDenominationLog = function() {
+const testGetDenominationLog = function() {
   const functionName = "getDenominationsLog";
   let message = "";
   printHeadLine("Running Test For Get Denomination Log");
@@ -54,16 +54,16 @@ const runTestForGetDenominationLog = function() {
   assertObject({10: 0, 5: 0, 2: 0, 1: 0}, getDenominationsLog(0, [1, 2, 5, 10]), message,  functionName);
 }
 
-const runTests = function() {
+const test = function() {
   printHeadLine("Vending Machine Tests");
 
-  runTestForGetArrangedDenominationSet();
-  runTestForGetUnarrangedDenominationSet();
-  runTestForSort();
-  runTestForGetDenominationLog();
+  testGetArrangedDenominationSet();
+  testGetUnarrangedDenominationSet();
+  testDecendingSort();
+  testGetDenominationLog();
 }
 
-runTests();
+test();
 displayTestSummary();
 //console.table(getTestLog());
 
