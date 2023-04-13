@@ -2,23 +2,8 @@ const getNoOfCoins = function(amount, denomination) {
   return Math.floor(amount / denomination);
 }
 
-const getCopy = function(list) {
-  return list.slice(0);
-}
-
-const maxOf = function(listOfNumbers) {
-  let currentMax = listOfNumbers[0];
-
-  for (const value of listOfNumbers) {
-    if (value > currentMax) {
-      currentMax = value;
-    };
-  };
-  return currentMax;
-}
-
 const sort = function(list) {
-  const listCopy = getCopy(list);
+  const listCopy = list.slice(0);
   let length = listCopy.length;
 
   for (let i = 0; i < listCopy.length; i++) {
@@ -35,23 +20,7 @@ const sort = function(list) {
   return listCopy;
 }
 
-
-//const sort = function(listOfNumbers) {
-//  const listOfNumbersCopy = getCopy(listOfNumbers);
-//  const sortedArray = [];
-//  const length = listOfNumbersCopy.length;
-//
-//  for (let index = 0; index < length; index++) {
-//    let currentMax = maxOf(listOfNumbersCopy);
-//    let indexOfCurrentMax = listOfNumbersCopy.indexOf(currentMax);
-//
-//    sortedArray.push(currentMax);
-//    listOfNumbersCopy.splice(indexOfCurrentMax, 1);
-//  }
-//  return sortedArray;
-//}
-
-const getCoinsLog = function(amount, denominationList) {
+const getDenominationsLog = function(amount, denominationList) {
   const coinsForEachDenominations = {};
   let remainingAmount = amount;
   denominationList = sort(denominationList);
@@ -75,9 +44,9 @@ const sumOf = function(list) {
 }
 
 const getMinimumNoOfCoins = function(amount, denomination_list) {
-  return sumOf(getCoinsLog(amount, denomination_list));
+  return sumOf(getDenominationsLog(amount, denomination_list));
 }
 
 exports.getMinimumNoOfCoins = getMinimumNoOfCoins;
-exports.maxOf = maxOf;
 exports.sort = sort;
+exports.getDenominationsLog = getDenominationsLog;

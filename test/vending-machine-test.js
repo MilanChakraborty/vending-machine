@@ -3,6 +3,7 @@ const vendingMachine = require("../src/vending-machine.js");
 
 const assert = testing.assert;
 const assertArray = testing.assertArray;
+const assertObject = testing.assertObject;
 const printHeadLine = testing.printHeadLine;
 const groupingTestLog = testing.groupingTestLog;
 const getTestLog = testing.getTestLog;
@@ -10,6 +11,7 @@ const displayTestSummary = testing.displayTestSummary;
 
 const getMinimumNoOfCoins = vendingMachine.getMinimumNoOfCoins;
 const sort = vendingMachine.sort;
+const getDenominationsLog = vendingMachine.getDenominationsLog;
 
 const runTestForGetMinimunNoOfCoins = function() {
   printHeadLine("Running Test For Get Minimum No Of Coins");
@@ -30,9 +32,12 @@ const runTestForGetMinimunNoOfCoins = function() {
   assert(8, getMinimumNoOfCoins(132, [5, 10, 2, 1, 20]), "Testing for unordered data and large set of denomination", "getMinimumNoOfCoins");
   assert(3, getMinimumNoOfCoins(8, [5, 2, 1]), "Testing for reversed arranged denomination list", "getMinimumNoOfCoins");
   assertArray([13, 6, 3], sort([6, 13, 3]), "Testing for Bubble Sort", "sort");
+  assertObject({10: 1, 5: 1, 2:1, 1:1}, getDenominationsLog(18, [1, 2, 5, 10]), "Testing For Getting Denominations Log with small set of denomination list", "getDenominationsLog");
+  assertObject({50: 1, 20: 1, 10: 1, 5: 1, 2:1, 1:1}, getDenominationsLog(88, [1, 2, 5, 10, 20, 50]), "Testing For Getting Denominations Log with large set of Denomination List",  "getDenominationsLog");
+  assertObject({50: 1, 20: 1, 10: 1, 5: 1, 2:1, 1:1}, getDenominationsLog(88, [1, 2, 5, 10, 20, 50]), "Testing For Getting Denominations Log for the amount of Zero",  "getDenominationsLog");
 }
 
 runTestForGetMinimunNoOfCoins();
 displayTestSummary();
-console.table(getTestLog());
+//console.table(getTestLog());
 
