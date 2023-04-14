@@ -4,11 +4,7 @@ const math = require("../lib/math-utilities.js")
 const decendingSort = sort.decendingSort;
 
 const sumOf = math.sumOf;
-
-
-const getNoOfCoins = function(amount, denomination) {
-  return Math.floor(amount / denomination);
-}
+const quotient = math.quotient;
 
 const getDenominationsLog = function(amount, denominations) {
   const coinsForEachDenominations = {};
@@ -16,7 +12,7 @@ const getDenominationsLog = function(amount, denominations) {
   denominations = decendingSort(denominations);
 
   for (const denomination of denominations) {
-    const coins = getNoOfCoins(remainingAmount, denomination);
+    const coins = quotient(remainingAmount, denomination);
 
     coinsForEachDenominations[denomination] = coins;
     remainingAmount = remainingAmount - (coins * denomination);

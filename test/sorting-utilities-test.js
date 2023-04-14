@@ -48,4 +48,3 @@ const testDecendingSort = function() {
 
 testDecendingSort();
 displayTestSummary();
-console.table(getTestLog());

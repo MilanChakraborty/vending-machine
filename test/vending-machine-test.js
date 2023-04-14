@@ -96,5 +96,4 @@ const test = function() {
 
 test();
 displayTestSummary();
-console.table(getTestLog());
 

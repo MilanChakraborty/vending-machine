@@ -68,4 +68,3 @@ const testSumOf = function() {
 
 testSumOf();
 displayTestSummary();
-//console.table(getTestLog());
