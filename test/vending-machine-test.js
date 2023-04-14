@@ -10,60 +10,91 @@ const getTestLog = testing.getTestLog;
 const displayTestSummary = testing.displayTestSummary;
 
 const determineMinimumNoOfCoins = vendingMachine.determineMinimumNoOfCoins;
-const decendingSort = vendingMachine.decendingSort;
 const getDenominationsLog = vendingMachine.getDenominationsLog;
 
-
-
-const testGetArrangedDenominationSet = function() {
+const testDetermineMinimumNoOfCoins = function() {
   const functionName = "determineMinimumNoOfCoins";
-  printHeadLine("Running Test For Arranged Denomination List");
+  printHeadLine("Running Test for Get Minimum No Of Coins");
 
-  assert(0, determineMinimumNoOfCoins(0, [1, 2, 5, 10]), "Amount of zero must give 0 Coins for any denomination set", functionName);
-  assert(1, determineMinimumNoOfCoins(1, [1, 2, 5, 10]), "Amount of one must give 1 Coins for denomination set having one", functionName);
-  assert(0, determineMinimumNoOfCoins(1, [2, 5, 10]), "Amount of one must give 0 Coins for denomination set not having one", functionName);
-  assert(4, determineMinimumNoOfCoins(13, [1, 4, 7]), "Amount of 13 must give 4 Coins for denomination set of 1,4 and 7", functionName);
-}
+  let expected = 0;
+  let actual = determineMinimumNoOfCoins(0, [1, 2, 5, 10]);
+  let detail = "Amount of Zero must give 0 Coins for any denomination set";
+  assert(expected, actual, detail, functionName);
 
-const testGetUnarrangedDenominationSet = function() {
-  const functionName = "determineMinimumNoOfCoins";
-  printHeadLine("Running Test For Unarranged Denomination List");
+  expected = 0;
+  actual = determineMinimumNoOfCoins(10, []);
+  detail = "When the Denominations set is empty, Must give 0 coins for any amount";
+  assert(expected, actual, detail, functionName);
 
-  assert(27, determineMinimumNoOfCoins(132, [5, 2, 1]), "Amount of 132 must give 27 coins for unordered denominations set of 1,2 and 5", functionName);
-  assert(8, determineMinimumNoOfCoins(132, [5, 10, 2, 1, 20]), "Amount of 132 must give 8 coins for unordered", "determineMinimumNoOfCoins");
+  expected = 1;
+  actual = determineMinimumNoOfCoins(1, [1, 2, 5, 10]);
+  detail = "When the amount is same as any denomination value, it must give one coin";
+  assert(expected, actual, detail, functionName);
 
-}
+  expected = 0;
+  actual = determineMinimumNoOfCoins(1, [2, 5, 10]);
+  detail = "When the amount is lower than all denomination values, it must give zero coin";
+  assert(expected, actual, detail, functionName);
 
-const testDecendingSort = function() {
-  const functionName = "decendingSort";
-  printHeadLine("Running Test For Sorting")
+  expected = 3;
+  actual = determineMinimumNoOfCoins(8, [1, 2, 5, 10]);
+  detail = "Must give the Minimum numbers of coins required for an given amount";
+  assert(expected, actual, detail, functionName);
 
-  assertArray([13, 6, 3], decendingSort([6, 13, 3]), "Should give the arranged array for list of distinct element", functionName);
-  assertArray([13, 10, 5, 5, 0], decendingSort([13, 5, 10, 0, 5]), "Should give the arranged array for a mixed list of distinct and same element", functionName);
+  expected = 4;
+  actual = determineMinimumNoOfCoins(18, [1, 2, 5, 10]);
+  detail = "Must give the Minimum number of coins required, when the denomination set is ordered";
+  assert(expected, actual, detail, functionName);
+
+  expected = 6;
+  actual = determineMinimumNoOfCoins(88, [1, 2, 5, 10, 20, 50]);
+  detail = "When an unordered array is provided, must return the minimum no of coins ";
+  assert(expected, actual, detail, functionName);
 }
 
 const testGetDenominationLog = function() {
   const functionName = "getDenominationsLog";
-  let message = "";
-  printHeadLine("Running Test For Get Denomination Log");
+  printHeadLine("Running Tests For Get Denomination Log");
 
-  message = "Amount of 18 must give one coin of each Denomination of (1, 2, 5, 10)"
-  assertObject({10: 1, 5: 1, 2:1, 1:1}, getDenominationsLog(18, [1, 2, 5, 10]), message , functionName);
+  let expected = {};
+  let actual = getDenominationsLog(10, []);
+  let detail = "When an empty denomination set is provided, must give an empty set of coins log";
+  assertObject(expected, actual, detail , functionName);
 
-  message = "Amount of 0 must return zero coins for each denominations of (1, 2, 5, 10)"
-  assertObject({10: 0, 5: 0, 2: 0, 1: 0}, getDenominationsLog(0, [1, 2, 5, 10]), message,  functionName);
+  expected = {1: 0, 2: 0, 5: 0};
+  actual = getDenominationsLog(0, [1, 2, 5]);
+  detail = "When the Amount is Zero, the coin log must have zero coins for each denomination";
+  assertObject(expected, actual, detail , functionName);
+
+  expected = {1: 0, 2: 0, 5: 1};
+  actual = getDenominationsLog(5, [1, 2, 5]);
+  detail = "When the Amount is equal to any denomination value, must give one coin of that denomination";
+  assertObject(expected, actual, detail , functionName);
+
+  expected = {2: 0, 5: 0, 10: 0};
+  actual = getDenominationsLog(0, [2, 5, 10]);
+  detail = "When the Amount is Lower Than all denomination values, must give zero coins for all denominations";
+  assertObject(expected, actual, detail , functionName);
+
+  expected = {1: 1, 2: 1, 5: 1};
+  actual = getDenominationsLog(8, [1, 2, 5]);
+  detail = "When an ordered Denomination List is Provided, must give log of minimum coins required";
+  assertObject(expected, actual, detail , functionName);
+
+  expected = {1: 1, 2: 1, 5: 1, 10: 1};
+  actual = getDenominationsLog(18, [10, 1, 5, 2]);
+  detail = "An unordered Denomination List must give log of minimum coins required for the amount";
+  assertObject(expected, actual, detail , functionName);
 }
 
 const test = function() {
   printHeadLine("Vending Machine Tests");
 
-  testGetArrangedDenominationSet();
-  testGetUnarrangedDenominationSet();
-  testDecendingSort();
+  testDetermineMinimumNoOfCoins();
   testGetDenominationLog();
 }
 
 test();
 displayTestSummary();
-//console.table(getTestLog());
+console.table(getTestLog());
 
